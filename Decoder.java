@@ -1,5 +1,15 @@
-public class Decoder {
+import java.util.Scanner;
 
+public class Decoder {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Binary/Hex: ");
+        while(sc.hasNextLine()){
+            
+            System.out.println("LC3 Instruction: " + decode(sc.nextLine()));
+            System.out.print("Enter Binary/Hex: ");
+        }
+    }
     public static String decode(String n){
         String bin = twosComplement(n);
         String command = bin.substring(0, 4);
@@ -174,7 +184,7 @@ public class Decoder {
         s = s.substring(3);
         sb.append(getRegister(s.substring(0, 3)) + " ");
         s = s.substring(3);
-        if(s.charAt(0) == 0){
+        if(s.charAt(0) == '0'){
             sb.append(getRegister(s.substring(3)));
         }else{
             sb.append("#");
@@ -190,7 +200,7 @@ public class Decoder {
         s = s.substring(3);
         sb.append(getRegister(s.substring(0, 3)) + " ");
         s = s.substring(3);
-        if(s.charAt(0) == 0){
+        if(s.charAt(0) == '0'){
             sb.append(getRegister(s.substring(3)));
         }else{
             sb.append("#");
@@ -246,8 +256,8 @@ public class Decoder {
                 }
                 return res;
             }
-        }else if(s.length() == 16){
-            return n;
+        }else if(s.substring(0,1).toLowerCase().equals("b") && s.length() == 17){
+            return s.substring(1);
         }else{
             return "Invalid Input";
         }
